@@ -32,14 +32,17 @@ Original <a href="https://github.com/ashee/cv" target="_blank">Friggeri CV</a>:
 * Strong Coloration
 * One Font
 
-## Take a Look:
+## Take a Look
  
+ **Résumé**
+Selected Options: roboto, noadress, custcol
 ![Résumé PDF p1](https://raw.githubusercontent.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template/master/png/cv_Page_1.png)
 ![Résumé PDF p2](https://raw.githubusercontent.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template/master/png/cv_Page_2.png)
-Selected Options: roboto, custcol
 
-![Résumé PDF p2](https://raw.githubusercontent.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template/master/png/coverletter.png)
+**Cover Letter**
 Selected Options: roboto, noadress, custcol
+![Résumé PDF p2](https://raw.githubusercontent.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template/master/png/coverletter.png)
+
 
 ## Résumé Sections
 
@@ -84,6 +87,7 @@ Icons are provided by the fontawesome package. <a href="https://ctan.math.illino
 4. In the `CV.tex`, bring the sections in order you prefer. Note: don't let a section exceed the first page, since breaking the longlist objects results in an error.
 5. If you want to use the custom single-color scheme, set your custom color as <a href="https://htmlcolorcodes.com/" target="_blank">HTML code</a> in `friggeri-cv.cls` and `friggeri-coverletter.cls`.
 6. Enter font and color options in the line `\documentclass[roboto,custcol]{friggeri-cv}` in the tex files. These options can be passed directly while building (see below).
+7. If you want to use the Publications section, replace the `bibliography.bib` file in the working directory.
 
 # Build the Documents
 
@@ -99,7 +103,7 @@ The class options (Fonts, Colors)can be put into the `DOCOPTIONS`.
 ## IDE Build
 
 1. Select build with XeLaTeX. Select "XeLaTeX + View PDF" for quick build.
-3. Select Quick Build and install all packages that may be missing on your system.
-2. If you want to use a publication list with a .bib file and Biber then you need to build a database from the .bib file before any contents will appear in the PDF.
-  1. Select Biber as bibliography builder. Then create a custom build command:  Next, b XeTeX -> Biber -> XeTeX -> XeTeX. <a href="https://tex.stackexchange.com/questions/154751/biblatex-with-biber-configuring-my-editor-to-avoid-undefined-citations/" target="_blank">More info here</a>.
-  2. Once the files were created you can resume with quick builds, unless you want to modify the database.
+3. Select `Quick Build` and install all packages that may be missing on your system as you are prompted. The PDF will be displayed in the IDE and a PDF file will be written in the working directory.
+2. If you want to use a Publication section then you need to run Biber during the build to generate a database from the .bib file before any contents will appear in the PDF. <a href="https://tex.stackexchange.com/questions/154751/biblatex-with-biber-configuring-my-editor-to-avoid-undefined-citations/" target="_blank">More here</a>.
+  1. In the IDE settings, select Biber as bibliography builder. Then create a custom build command: "XeTeX -> Biber -> XeTeX -> XeTeX". Biber will generate library data base files in your working directory. 
+  2. Once the files were created you can resume with `Quick Build`, unless you want to modify the database.
