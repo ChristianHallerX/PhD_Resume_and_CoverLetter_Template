@@ -15,5 +15,11 @@ jobs:
       install:
         - docker pull christianhallerx/tect-docker
 
-      script: |
-       - docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind christianhallerx/tect-docker /bin/sh -c "tectonic cv.tex; tectonic coverletter.tex"
+      script:
+         docker run --mount src=$TRAVIS_BUILD_DIR,target=/usr/src/tex,type=bind christianhallerx/tect-docker /bin/bash \
+         echo "----- CV -----"; \
+         tectonic --keep-intermediates --reruns 0 cv.tex && \
+         biber cv && \
+         tectonic cv.tex || exit 1; \
+         echo "----- CoverLetter -----"; \
+         tectonic coverletter.tex && exit 1'\
