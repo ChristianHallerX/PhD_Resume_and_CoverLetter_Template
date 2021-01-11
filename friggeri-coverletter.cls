@@ -1,4 +1,4 @@
-\ProvidesClass{friggeri-txt}[2012/04/30 CV class]
+\ProvidesClass{friggeri-coverletter}[2012/04/30 CV class]
 \NeedsTeXFormat{LaTeX2e}
 
 \DeclareOption{heros}{
@@ -22,12 +22,12 @@
     \PassOptionsToClass{addrfield=false,backaddress=false,}{scrlttr2}
 }
 \DeclareOption{nocolors}{\def\@cv@nocolors{}}
-\DeclareOption{custcol}{\def\@cv@custcol{}}
 \DeclareOption{print}{\def\@cv@print{}}
 
-\ExecuteOptions{heros}                                    % default option
+\ExecuteOptions{roboto}
 
-\PassOptionsToClass{\CurrentOption,fontsize=10pt,%%          Schriftgroesse
+
+\PassOptionsToClass{\CurrentOption,fontsize=11pt,%%          Schriftgroesse
 %---------------------------------------------------------------------------
 % Satzspiegel
    paper=letter,%%               Papierformat
@@ -49,6 +49,7 @@
 
 \LoadClass{scrlttr2}
 
+
 %%%%%%%%%%
 % Colors %
 %%%%%%%%%%
@@ -56,14 +57,12 @@
 \RequirePackage{xcolor}
 
 \definecolor{white}{RGB}{255,255,255}
+
 \definecolor{darkgray}{HTML}{333333}
 \definecolor{gray}{HTML}{4D4D4D}
 \definecolor{lightgray}{HTML}{999999}
 
-% custom color
-\definecolor{customcolor}{HTML}{4FB1BA}                    % define your custom color here
-
-% default friggeri colors
+\definecolor{chwebsitetur}{HTML}{4FB1BA}
 \definecolor{friggerigreen}{HTML}{C2E15F}
 \definecolor{friggeriorange}{HTML}{FDA333}
 \definecolor{friggeripurple}{HTML}{D3A4F9}
@@ -74,9 +73,7 @@
 \definecolor{friggerisepia}{HTML}{CD8913}
 \definecolor{friggeribrown}{HTML}{A52A2A}
 
-% gray pallette for printing
 \ifdefined\@cv@print
-  \colorlet{customcolor}{gray}
   \colorlet{friggerigreen}{gray}
   \colorlet{friggeriorange}{gray}
   \colorlet{friggeripurple}{gray}
@@ -95,9 +92,9 @@
 \colorlet{textcolor}{gray}
 \colorlet{headercolor}{gray}
 
-% pallette for nocolors (gray and white)
+\def\colorPallete{{"friggeriblue","friggerired","friggeriorange","friggerigreen","friggeripurple","friggeribrown","friggeriyellowgreen","friggeribrickred"}}
+
 \ifdefined\@cv@nocolors
-  \colorlet{customcolor}{white}
   \colorlet{friggerigreen}{gray}
   \colorlet{friggeriorange}{gray}
   \colorlet{friggeripurple}{gray}
@@ -107,7 +104,6 @@
   \colorlet{friggeriyellowgreen}{gray}
   \colorlet{friggeribrickred}{gray}
   \colorlet{friggerisepia}{gray}
-  \colorlet{header}{white}
 \fi
 
 %%%%%%%%%
@@ -117,7 +113,7 @@
 \setkomavar{fromname}{\firstname{} \lastname} % Your name
 \setkomavar{fromemail}[\href{mailto:\fromemail}]{\fromemail} % Your email address
 \setkomavar{fromphone}[\href{tel:\fromephone}]{\fromephone} % Your phone number
-\setkomavar{subject}{\headingfont\color{headercolor}\subjectline} % This is the bold text saying 'Recipient Company', remove it if you don't like it
+\setkomavar{subject}{\headingfont\color{headercolor}\subjectline} % This is the bold text saying 'Cover Letter', remove it if you don't like it
 
 %%%%%%%%%
 % Fonts %
@@ -164,9 +160,9 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
 \setmathfont[Path=fonts/\@cv@fontface/]{\@cv@fontface-Regular.ttf}
 %%%
 
-%%%%%%%%%%
-% Header %
-%%%%%%%%%%
+%%%%%%%%%%%%%%%%%
+% HEADER/FOOTER %
+%%%%%%%%%%%%%%%%%
 
 \RequirePackage{tikz}
 
@@ -207,12 +203,12 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \end{tikzpicture}
 }
 
+
 %%%%%%%%%%%%%
 % Structure %
 %%%%%%%%%%%%%
 \RequirePackage{parskip}
 
-% paragraph-start colors (default)
 \newcounter{colorCounter}
 \def\@paragraphcolor#1#2#3{%
   {%
@@ -233,29 +229,6 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \stepcounter{colorCounter}%
 }
 
-% paragraph-start colors (custom)
-\ifdefined\@cv@custcol
- \newcounter{colorCounter2}
- \def\@paragraphcolor#1#2#3{%
-   {%
-     \addfontfeature{Color=%
-       \ifcase\value{colorCounter}%
-         customcolor\or%
-         customcolor\or%
-         customcolor\or%
-         customcolor\or%
-         customcolor\or%
-         customcolor\or%
-         customcolorn\or%
-         customcolor\or%
-         customcolor\else%
-         headercolor\fi%
-     } #1#2#3%
-   }%
-   \stepcounter{colorCounter2}%
- }
-\fi
-
 \newcommand{\paragraph}[2]{
   {\@paragraphcolor #1 %
     #2%
@@ -264,8 +237,9 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
 
 \pagestyle{empty}
 
+
 %%%%%%%%%%%%%%%%
-% Other tweaks %
+% OTHER TWEAKS %
 %%%%%%%%%%%%%%%%
 
 \ifdefined\@cv@adress
@@ -278,6 +252,8 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
 
 \setlength{\parindent}{0pt} % Removes all indentation from paragraphs
 
+
+
 %----------------------------------------------------------------------------------------
 %  HEADER SECTION
 %----------------------------------------------------------------------------------------
@@ -289,3 +265,10 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
 %----------------------------------------------------------------------------------------
 
 \setkomavar{firstfoot}{\footer}
+
+
+%----------------------------------------------------------------------------------------
+%  GRAPHICS
+%----------------------------------------------------------------------------------------
+
+\usepackage{graphicx}

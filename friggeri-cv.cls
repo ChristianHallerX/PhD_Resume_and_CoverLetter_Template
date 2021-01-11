@@ -19,11 +19,13 @@
 
 \DeclareOption{nocolors}{\def\@cv@nocolors{}}
 \DeclareOption{print}{\def\@cv@print{}}
+\DeclareOption{custcol}{\def\@cv@custcol{}}
 
 \DeclareOption*{%
   \PassOptionsToClass{\CurrentOption,10pt}{article}%
 }
-\ExecuteOptions{heros}
+
+\ExecuteOptions{heros}                                    % default options
 
 \ProcessOptions\relax
 \LoadClass{article}
@@ -36,11 +38,14 @@
 \RequirePackage{xcolor}
 
 \definecolor{white}{RGB}{255,255,255}
-
 \definecolor{darkgray}{HTML}{333333}
 \definecolor{gray}{HTML}{4D4D4D}
 \definecolor{lightgray}{HTML}{999999}
 
+% custom color
+\definecolor{customcolor}{HTML}{4FB1BA}                 % define your custom color here
+
+% default friggeri colors
 \definecolor{friggerigreen}{HTML}{C2E15F}
 \definecolor{friggeriorange}{HTML}{FDA333}
 \definecolor{friggeripurple}{HTML}{D3A4F9}
@@ -51,7 +56,9 @@
 \definecolor{friggerisepia}{HTML}{CD8913}
 \definecolor{friggeribrown}{HTML}{A52A2A}
 
+% gray pallette for printing
 \ifdefined\@cv@print
+  \colorlet{customcolor}{gray}
   \colorlet{friggerigreen}{gray}
   \colorlet{friggeriorange}{gray}
   \colorlet{friggeripurple}{gray}
@@ -62,17 +69,24 @@
   \colorlet{friggeribrickred}{gray}
   \colorlet{friggerisepia}{gray}
   \colorlet{fillheader}{white}
-  \colorlet{header}{gray}
+  \colorlet{header}{gray}                               % header = header font color
 \else
-  \colorlet{fillheader}{gray}
-  \colorlet{header}{white}
+  \colorlet{fillheader}{gray}                           % fillheader = header area of solid-color fill
+  \colorlet{header}{white}                              % header = header font color
 \fi
-\colorlet{textcolor}{gray}
-\colorlet{headercolor}{gray}
 
-\def\colorPallete{{"friggeriblue","friggerired","friggeriorange","friggerigreen","friggeripurple","friggeribrown","friggeriyellowgreen","friggeribrickred"}}
+\colorlet{textcolor}{gray}                              % textcolor = body font color
+\colorlet{headercolor}{gray}							% headercolor = list-header color
 
+% pallete for skill points 
+\def\colorPallete{{"customcolor","friggerired","friggeriorange","friggerigreen","friggeripurple","friggeribrown","friggeriyellowgreen","friggeribrickred"}} 
+\ifdefined\@cv@custcol
+ \def\colorPallete{{"customcolor","customcolor","customcolor","customcolor","customcolor"}}
+\fi
+
+% pallette for nocolors (gray and white)
 \ifdefined\@cv@nocolors
+  \colorlet{customcolor}{gray}
   \colorlet{friggerigreen}{gray}
   \colorlet{friggeriorange}{gray}
   \colorlet{friggeripurple}{gray}
@@ -82,11 +96,13 @@
   \colorlet{friggeriyellowgreen}{gray}
   \colorlet{friggeribrickred}{gray}
   \colorlet{friggerisepia}{gray}
+  \colorlet{header}{white}                               % header = header font color
 \fi
 
 %%%%%%%%%
-% Fonts %g
+% Fonts %
 %%%%%%%%%
+
 \RequirePackage[quiet]{fontspec}
 \RequirePackage[math-style=TeX]{unicode-math}
 \RequirePackage{fontawesome}
@@ -102,7 +118,6 @@
 % \setmainfont[Mapping=tex-text, Color=textcolor]{Helvetica Neue Light}
 % 
 % \setmathfont{XITS Math}
-
 %%% modified by Karol Kozioł for ShareLaTex use
 %\RequirePackage[quiet]{fontspec}
 %\RequirePackage[math-style=TeX]{unicode-math}
@@ -127,7 +142,6 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
 {\@cv@fontface-Regular.ttf}
 
 \setmathfont[Path=fonts/\@cv@fontface/]{\@cv@fontface-Regular.ttf}
-%%%
 
 %%%%%%%%%%
 % Header %
@@ -157,12 +171,13 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \vspace{-2\parskip}
 }
 
-
 %%%%%%%%%%%%%
 % Structure %
 %%%%%%%%%%%%%
+
 \RequirePackage{parskip}
 
+% paragraph-start colors (default)
 \newcounter{colorCounter}
 \def\@sectioncolor#1#2#3{%
   {%
@@ -183,6 +198,30 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \stepcounter{colorCounter}%
 }
 
+% paragraph-start colors (custom)
+\ifdefined\@cv@custcol
+ \newcounter{colorCounter2}
+ \def\@sectioncolor#1#2#3{%
+   {%
+     \color{%
+       \ifcase\value{colorCounter}%
+         customcolor\or%
+         customcolor\or%
+         customcolor\or%
+         customcolor\or%
+         customcolor\or%
+         customcolor\or%
+         customcolor\or%
+         customcolor\or%
+         customcolor\or%
+         customcolor\else%
+         headercolor\fi%
+     } #1#2#3%
+   }%
+   \stepcounter{colorCounter2}%
+ }
+\fi
+
 \renewcommand{\section}[1]{
   \par\vspace{\parskip}
   {%
@@ -199,9 +238,6 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   }
   \par\vspace{.25\parskip}%
 }
-
-\pagestyle{empty}
-
 
 %%%%%%%%%%%%%%%%%%%%
 % List environment %
@@ -229,20 +265,36 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \multicolumn{1}{r}{\footnotesize Thesis}&\parbox[t]{11.8cm}{#5}\\%
   \multicolumn{1}{r}{\footnotesize Coursework}&\parbox[t]{11.8cm}{{\footnotesize #6}%
   \vspace{\parsep}}\\}
-
+  
 %%%%%%%%%%%%%%
-% Side block %
+% Side Block %
 %%%%%%%%%%%%%%
 
+% ASIDE page 1
 \RequirePackage[absolute,overlay]{textpos}
 \setlength{\TPHorizModule}{1cm}
 \setlength{\TPVertModule}{1cm}
-\newenvironment{aside}{%
+\newenvironment{asidep1}{%
   \let\oldsection\section
   \renewcommand{\section}[1]{
     \par\vspace{\baselineskip}{\Large\headingfont\color{headercolor} ##1}
   }
   \begin{textblock}{3.6}(1.5, 4.33)
+  \begin{flushright}
+  \obeycr
+}{%
+  \restorecr
+  \end{flushright}
+  \end{textblock}
+  \let\section\oldsection
+}
+% ASIDE page 2
+\newenvironment{asidep2}{%
+  \let\oldsection\section
+  \renewcommand{\section}[1]{
+    \par\vspace{\baselineskip}{\Large\headingfont\color{headercolor} ##1}
+  }
+  \begin{textblock}{3.6}(1.5, 1.3)
   \begin{flushright}
   \obeycr
 }{%
@@ -266,6 +318,7 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
                     software,%
                     report]{title}{\small#1\par}
 
+%%%%% thesis
 \DeclareBibliographyDriver{thesis}{%
   \printfield{title}%
   \par%
@@ -287,6 +340,7 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \par\vspace{0.3\baselineskip}
 }
 
+%%%%% article
 \DeclareBibliographyDriver{article}{%
   \printfield{title}%
   \newblock%
@@ -314,6 +368,7 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \par\vspace{0.3\baselineskip}
 }
 
+%%%%% book
 \DeclareBibliographyDriver{book}{%
   \printfield{title}%
   \newblock%
@@ -334,7 +389,7 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \par\vspace{0.3\baselineskip}
 }
 
-
+%%%%% inproceedings
 \DeclareBibliographyDriver{inproceedings}{%
   \printfield{title}%
   \newblock%
@@ -361,6 +416,7 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \par\vspace{0.3\baselineskip}
 }
 
+%%%%% misc
 \DeclareBibliographyDriver{misc}{%
   \printfield{title}%
   \newblock%
@@ -379,6 +435,7 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \par\vspace{0.3\baselineskip}
 }
 
+%%%%% report
 \DeclareBibliographyDriver{report}{%
   \printfield{title}%
   \newblock%
@@ -399,6 +456,7 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \par\vspace{0.3\baselineskip}
 }
 
+%%%%% software
 \DeclareBibliographyDriver{software}{%
   \printfield{title}%
   \newblock%
@@ -444,26 +502,24 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
   \begin{refsection}
      \nocite{*}
      \ifblank{#1}{%
-         \printbibliography[sorting=chronological, type={#2}, title={#3}, heading=bibheading]%
+         \newrefcontext[sorting=chronological]
+         \printbibliography[type={#2}, title={#3}, heading=bibheading]%
      }{%
      \ifblank{#2}{%
-         \printbibliography[sorting=chronological, #1, title={#3}, heading=bibheading]%
+         \newrefcontext[sorting=chronological]
+         \printbibliography[#1, title={#3}, heading=bibheading]%
          }{%
-         \printbibliography[sorting=chronological, #1, type={#2}, title={#3}, heading=bibheading]%
+         \newrefcontext[sorting=chronological]
+         \printbibliography[#1, type={#2}, title={#3}, heading=bibheading]%
          }
      }
   \end{refsection}
  }
-  
 
-  
-  
- \DeclareSortingScheme{chronological}{
+ \DeclareSortingTemplate{chronological}{
    \sort[direction=descending]{\field{year}}
    \sort[direction=descending]{\field{month}}
  }
-
-
 
 %%%%%%%%%%%%%%
 % References %
@@ -489,9 +545,9 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
     \begin{minipage}[t]{\listdoubleitemmaincolumnwidth}{#2}\end{minipage}\\%
 }
 
-%%%%%%%%%%%%%%
-% Points %
-%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+% Skill Points %
+%%%%%%%%%%%%%%%%
 
 \usetikzlibrary{shapes}
 \newcommand\score[1]{
@@ -507,8 +563,22 @@ BoldItalicFont=\@cv@fontface-BoldItalic.ttf
 }
 
 %%%%%%%%%%%%%%%%
+% Page Numbers %
+%%%%%%%%%%%%%%%%
+
+% numbers on
+\pagestyle{plain}
+
+% numbers off
+%\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%
 % Other tweaks %
 %%%%%%%%%%%%%%%%
 
-\RequirePackage[left=6.1cm,top=2cm,right=1.5cm,bottom=2.5cm,nohead,nofoot]{geometry}
+% page margins
+\RequirePackage[left=6.1cm,top=2cm,right=1.5cm,bottom=2.1cm,nohead,nofoot]{geometry}
+% no link underscore
 \RequirePackage[hidelinks]{hyperref}
+\setlength{\parsep}{2 mm}

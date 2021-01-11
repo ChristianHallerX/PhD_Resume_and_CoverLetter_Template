@@ -1,19 +1,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Friggeri Resume/CV
+% PhD_Resume_and_CoverLetter_Template
 % XeLaTeX Template
-% Version 2.0 (2019-08-14)
+% Version 1.0 (2020-09-01)
 %
+% Author of this CV/CoverLetter fork:
+% Christian Haller
 % This template has been downloaded from:
-% https://github.com/JesperDramsch/friggeri-cv-boosted
+% https://github.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template
 %
-% Original author:
+% Original Résumé Author:
 % Adrien Friggeri (adrien@friggeri.net)
 % https://github.com/afriggeri/CV
-% Heavy modifications by
+% Résumé Modified by:
 % Jesper Dramsch (jesper@dramsch.net)
 % https://github.com/JesperDramsch/friggeri-cv-boosted
 %
-% Author of Letter Template:
+% Original Cover Letter Author:
 % Jesper Dramsch (jesper@dramsch.net)
 % https://github.com/JesperDramsch/friggeri-cv-boosted
 %
@@ -23,35 +25,47 @@
 % Important notes:
 % This template needs to be compiled with XeLaTeX and the bibliography, if used,
 % needs to be compiled with biber rather than bibtex.
-%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[nocolors,noadress]{friggeri-txt}
-%\documentclass[nocolors,noadress]{friggeri-txt}
 
-\usepackage[english]{babel} % Required to compile in Windows
+\documentclass[roboto,noadress,custcol]{friggeri-txt}                       % Pass options to .cls in brackets. Example: [nunito,noadress,nocolors]
+
+%----------------------------------------------------------------------------------------
+%  SIZE AND FORMATTING
+%----------------------------------------------------------------------------------------
+
+\usepackage{geometry}
+\geometry{letterpaper,portrait,margin=1 in}                                               % paper and margin formattting
+
+\usepackage[english]{babel}                                                               % Required to compile in Windows
 
 %----------------------------------------------------------------------------------------
 %  PERSONAL INFORMATION
 %----------------------------------------------------------------------------------------
 
-\newcommand{\firstname}{John}
-\newcommand{\lastname}{Smith}
-\newcommand{\jobposition}{Junior Business Analyst}
-\newcommand{\fromemail}{john@smith.com}
-\newcommand{\fromephone}{+0 (000) 111 1111}
-\newcommand{\subjectline}{Motivational Letter}
+% header
+\newcommand{\firstname}{Foo}                                                              % plug in your firstname
+\newcommand{\lastname}{Bar, Ph.D.}                                                        % plug in your lastname
+\newcommand{\jobposition}{Title 1\space\space|\space\space Title 2}                       % plug in your current title(s)
+\newcommand{\subjectline}{Recipient Company}                                              % plug in recipient organization or requisition title
 
-\setkomavar{fromaddress}{123 Broadway\\City, State 12345\\Country} % Your address
-\setkomavar{signature}{\firstname~\lastname} % Your name as you want it to appear in the signature 
+% body
+\setkomavar{signature}{Foo Bar}                                                           % plug your in name for signature
+
+% footer
+\setkomavar{fromaddress}{123 Broadway\\City, State 12345\\Country}         % plug in your physical address or alternatively LinkedIn, website, etc
+\newcommand{\fromemail}{foobar@hmail.xyz}                                                 % plug in your email address
+\newcommand{\fromephone}{+1 (111) 111 1111}                                               % plug in your phone number
 %----------------------------------------------------------------------------------------
+
+
 
 \begin{document}
 %----------------------------------------------------------------------------------------
 % COVER LETTER CONTENTS
 %----------------------------------------------------------------------------------------
 
-\begin{letter}{ % Address of the company you are applying to
-That Place \\
+\begin{letter}{                                                                           % plug in application organization address
+That Place \\                                                                             % (invisible if "noaddress" is passed)
 That Street 5 \\
 Somehwere}
 
@@ -60,9 +74,13 @@ Somehwere}
 \paragraph{Excepteur}{sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.}\\[6pt]
 \paragraph{Sed ut}{perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet}\\[6pt]
 \paragraph{V ero }{eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. }
-
-Best Regards\\
-\usekomavar{signature}
+\\
+\\
+\\
+Best Regards,\\
+\usekomavar{signature}\\
+\\
+\includegraphics[width=40mm]{signature.png}                                                % remove or adjust size
 \vspace*{-40pt}
 \end{letter}
 \end{document}

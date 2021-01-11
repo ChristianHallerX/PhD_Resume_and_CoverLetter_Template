@@ -1,19 +1,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Friggeri Resume/CV
+% PhD_Resume_and_CoverLetter_Template
 % XeLaTeX Template
-% Version 2.0 (2019-08-14)
+% Version 1.0 (2020-09-01)
 %
+% Author of this CV/CoverLetter fork:
+% Christian Haller
 % This template has been downloaded from:
-% https://github.com/JesperDramsch/friggeri-cv-boosted
+% https://github.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template
 %
-% Original author:
+% Original Résumé Author:
 % Adrien Friggeri (adrien@friggeri.net)
 % https://github.com/afriggeri/CV
-% Heavy modifications by
+% Résumé Modified by:
 % Jesper Dramsch (jesper@dramsch.net)
 % https://github.com/JesperDramsch/friggeri-cv-boosted
 %
-% Author of Letter Template:
+% Original Cover Letter Author:
 % Jesper Dramsch (jesper@dramsch.net)
 % https://github.com/JesperDramsch/friggeri-cv-boosted
 %
@@ -23,101 +25,132 @@
 % Important notes:
 % This template needs to be compiled with XeLaTeX and the bibliography, if used,
 % needs to be compiled with biber rather than bibtex.
-%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{.head}
-% This \input{.head} can be replaced by \documentclass[]{friggeri-cv} in your personal document.
 
-\addbibresource{bibliography.bib} % Specify the bibliography file to include publications
+%\input{.head}
+\documentclass[roboto,custcol]{friggeri-cv}                                       % Pass options to .cls in brackets. Example: [roboto,nocolors]
+
+\addbibresource{bibliography.bib}                                                 % Specify the bibliography file to include publications
 
 \begin{document}
 
-\header{john}{smith}{junior business analyst} % Your name and current job title/field
+\header{Foo}{Bar, Ph.D.}{Title 1\space\space|\space\space Title 2}  % plug in your name and current title(s)
 
 %----------------------------------------------------------------------------------------
-%	SIDEBAR SECTION
+%	SIDEBAR SECTION (page 1)                                                      % In the sidebar, each new line forces a line break
 %----------------------------------------------------------------------------------------
-
-\begin{aside} % In the aside, each new line forces a line break
-\section{contact}
+\begin{asidep1}
+\section{contact}\vspace{2 mm}
 123 Broadway \faMapMarker
 City, State 12345
 Country
-~
-+0 (000) 111 1111 \faPhone
-+0 (000) 111 1112 \faPhone
-~
-\href{mailto:john@smith.com}{john@smith.com \faEnvelope}
-\href{http://www.smith.com}{http://www.smith.com~\faBookmark}
-\href{http://facebook.com/johnsmith}{fb://jsmith \faFacebook}
-\section{languages}
-\begin{tabular}{r r}
-english&\score{5}
-spanish&\score{4}
-italian&\score{2}\end{tabular}
-\section{programming}
-JavaScript
-Python, C++, PHP
-CSS3 \& HTML5
-\end{aside}
++1 (111) 111 1111 \faPhone\\                                                      % plug in your phone number
+\href{mailto:foobar@hmail.xyz}{mail@hmail.xyz \faEnvelope}\\\vspace{2 mm}         % plug in your email address
+\section{profiles}\vspace{2 mm}
+\href{http://examplepage.org/}{examplepage.org~\faFirefox}\\                      % plug in your website
+\href{https://www.linkedin.com/}{LinkedIn \faLinkedin}\\                          % plug in your LinkedIn profile
+\href{https://github.com/}{GitHub \faGithub}\\                                    % plug in your GitHub profile
+\href{https://www.researchgate.net/}{ResearchGate \faUniversity}\\\vspace{2 mm}     % plug in your ResearchGate or Google Scholar Profile
+\section{programming}\vspace{2 mm}
+Python, Go
+R, Perl
+\LaTeX , C
+C++\vspace{2 mm}
+\section{skill highlights}\vspace{2 mm}
+Highlight 1
+Highlight 2
+Highlight 3
+Highlight 4
+\end{asidep1}
+
+%----------------------------------------------------------------------------------------
+%	PROFILE SECTION
+%----------------------------------------------------------------------------------------
+\input{sections/profile.tex}
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION                                                      % Do not exceed page 1 with this section
+%----------------------------------------------------------------------------------------
+\input{sections/experience.tex}
 
 %----------------------------------------------------------------------------------------
 %	EDUCATION SECTION
 %----------------------------------------------------------------------------------------
-
+\vspace{-5 mm}
 \input{sections/education.tex}
+\clearpage
 
 %----------------------------------------------------------------------------------------
-%	WORK EXPERIENCE SECTION
+%	SIDEBAR SECTION (page 2)                                                     % In the sidebar, each new line forces a line break
 %----------------------------------------------------------------------------------------
+\begin{asidep2}
+\section{software skills}\vspace{2 mm}
+Adobe Suite
+SEO Marketing
+UI Design
+Network Sec
+Database Management
+Mobile Development\vspace{2 mm}
+\section{interpersonal skills}\vspace{2 mm}
+Punctuality
+Social Skills
+Adaptability
+Organization
+Conflict Management\vspace{2 mm}
+\section{languages}
+\begin{tabular}{r r}
+Esperanto&\score{3}
+Latin&\score{4}
+Klingon&\score{5}\end{tabular}\vspace{2 mm}
+\section{leadership}\vspace{2 mm}
+LARPING \faUsers
+\href{http://examplepage1.org/}{President}
+\href{http://examplepage1.org/}{@LARPCON'20}
+\href{http://examplepage2.org/}{Treasurer}
+\href{http://examplepage2.org/}{@LARP Chapter, Town}\vspace{2 mm}
+\href{http://examplepage3.org/}{Spicy Noodle Committee \faUsers}
+\href{http://examplepage3.org/}{@YMCA, Town'16\textendash now}
+\end{asidep2}
 
-\input{sections/experience.tex}
+%----------------------------------------------------------------------------------------
+%	Projects SECTION
+%----------------------------------------------------------------------------------------
+\input{sections/projects.tex}
+\vspace{4 mm}
+
+%----------------------------------------------------------------------------------------
+%	CERTIFICATIONS SECTION
+%----------------------------------------------------------------------------------------
+\input{sections/certifications.tex}
+
+%----------------------------------------------------------------------------------------
+%	PUBLICATIONS SECTION (biber config required)
+%----------------------------------------------------------------------------------------
+%\input{sections/publications.tex}
 
 %----------------------------------------------------------------------------------------
 %	AWARDS SECTION
 %----------------------------------------------------------------------------------------
-
-\input{sections/awards.tex}
+%\input{sections/awards.tex}
 
 %----------------------------------------------------------------------------------------
 %	COMMUNICATION SKILLS SECTION
 %----------------------------------------------------------------------------------------
-
-\input{sections/communication.tex}
-
+%\input{sections/communication.tex}
 
 %----------------------------------------------------------------------------------------
 %	VOLUNTARY ACTIVITIES SECTION
 %----------------------------------------------------------------------------------------
-
-\input{sections/volunteer.tex}
+%\input{sections/volunteer.tex}
 
 %----------------------------------------------------------------------------------------
 %	INTERESTS SECTION
 %----------------------------------------------------------------------------------------
-
-\input{sections/interest.tex}
-
-%----------------------------------------------------------------------------------------
-%	PUBLICATIONS SECTION
-%----------------------------------------------------------------------------------------
-
-\input{sections/publications.tex}
+%\input{sections/interest.tex}
 
 %----------------------------------------------------------------------------------------
 %	REFERENCES SECTION
 %----------------------------------------------------------------------------------------
-
-\input{sections/references.tex}
-
-
-
-
-%----------------------------------------------------------------------------------------
-
-
-
-
-
+%\input{sections/references.tex}
 
 \end{document}
