@@ -27,7 +27,7 @@
 
 \ExecuteOptions{heros}                                    % default option
 
-\PassOptionsToClass{\CurrentOption,fontsize=10pt,%%          Schriftgroesse
+\PassOptionsToClass{\CurrentOption,fontsize=11pt,%%       % font size
 %---------------------------------------------------------------------------
 % Satzspiegel
    paper=letter,%%               Papierformat
