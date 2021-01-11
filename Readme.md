@@ -36,7 +36,7 @@ Original <a href="https://github.com/ashee/cv" target="_blank">Friggeri CV</a>:
 * One Font
 
 ## Take a Look:
-
+ 
 ![Résumé PDF p1](https://raw.githubusercontent.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template/master/png/cv_Page_1.png)
 ![Résumé PDF p2](https://raw.githubusercontent.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template/master/png/cv_Page_2.png)
 Selected Options: roboto, custcol
