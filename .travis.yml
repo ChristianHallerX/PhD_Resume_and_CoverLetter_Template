@@ -1,7 +1,68 @@
-sudo: required
 language: generic
-services: docker
 
-script:
-  - docker pull dxjoke/tectonic-docker
-  - docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind dxjoke/tectonic-docker /bin/sh -c "tectonic cv.tex; tectonic coverletter.tex"
+before_install:
+  # Install makeindex, if you do not use an index you can remove this (also remove the extra makeindex call).
+  - sudo apt-get install texlive-binaries
+
+install:
+  # Silent install from conda docs
+  # https://conda.io/docs/user-guide/install/macos.html#install-macos-silent
+  # adapted using
+  # https://conda.io/docs/user-guide/tasks/use-conda-with-travis-ci.html
+
+  # Needed to check if conda already installed
+  - export PATH="$HOME/miniconda/bin:$PATH"
+
+  # If not yet installed, obtain Miniconda
+  # and tectonic
+  # From tectonic docs
+  # https://tectonic-typesetting.github.io/en-US/install.html#the-anaconda-method
+  - if ! command -v conda > /dev/null; then
+      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+      bash miniconda.sh -b -p $HOME/miniconda -u;
+      conda config --add channels conda-forge;
+      conda config --set always_yes yes;
+      conda install tectonic==0.1.11;
+    fi
+  # Install biber if required for compiling the references.
+  # Biber version should match the biblatex version of Tectonic
+  - conda install -c malramsay biber==2.11 --yes
+  - conda info -a
+  # Workaround if a specific bundle is needed
+#  - sudo mkdir -p ~/.config/Tectonic/
+#  - echo "[[default_bundles]]" | sudo tee --append ~/.config/Tectonic/config.toml
+#  - sudo echo "url = \"https://tectonic.newton.cx/bundles/tlextras-2018.1r0/bundle.tar\"" | sudo tee --append ~/.config/Tectonic/config.toml
+cache:
+  directories:
+    - $HOME/miniconda
+    - $HOME/.cache/Tectonic
+script: # Change working directory each time so including files will work. Change back so the pdfs can be found for deployment. This way, building multiple files goes well.
+ - cd ./src/
+ # Run tectonic once to generate intermediate files
+ - tectonic --keep-intermediates --reruns 0 ./cv.tex
+ # If a bcf file exists run biber to compile references
+ - if [ -f "cv.bcf" ]; then biber cv; fi
+
+ # Only needed when using an index:
+# - tectonic --keep-intermediates ./main.tex
+ # Tectonic does not include makeindex, so that needs to be done manually.
+# - makeindex ./main.idx
+
+ # Final run of tectonic to create output
+ - tectonic ./cv.tex --print
+ - cd ../
+ 
+  - cd ./src/
+ # Run tectonic once to generate intermediate files
+ - tectonic --keep-intermediates --reruns 0 ./coverletter.tex
+ # If a bcf file exists run biber to compile references
+ - if [ -f "coverletter.bcf" ]; then biber coverletter; fi
+
+ # Only needed when using an index:
+# - tectonic --keep-intermediates ./main.tex
+ # Tectonic does not include makeindex, so that needs to be done manually.
+# - makeindex ./main.idx
+
+ # Final run of tectonic to create output
+ - tectonic ./coverletter.tex --print
+ - cd ../
