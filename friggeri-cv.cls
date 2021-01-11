@@ -103,7 +103,7 @@
 % Fonts %
 %%%%%%%%%
 
-\RequirePackage[quiet]{fontspec}
+%\RequirePackage[quiet]{fontspec}
 \RequirePackage[math-style=TeX]{unicode-math}
 \RequirePackage{fontawesome}
 \RequirePackage{calc}
