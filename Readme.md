@@ -1,43 +1,48 @@
-# PhD_Resume_and_CoverLetter_Template
+# PhD Resume and CoverLetter Template
 
-[![](https://img.shields.io/badge/PDF-latest-orange.svg?style=flat)](https://github.com/JesperDramsch/latex-cv-boosted/tree/master-pdf) [![Build Status](https://travis-ci.org/JesperDramsch/latex-cv-boosted.svg?branch=master)](https://travis-ci.org/JesperDramsch/latex-cv-boosted)
+[![Build Status](https://travis-ci.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template.svg?branch=master)](https://travis-ci.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template)
 
 
 # Introduction
 
 LaTeX résumé and cover letter tetemplate based on the classic <a href="https://www.latextemplates.com/template/friggeri-resume-cv" target="_blank"> "Friggeri CV"</a> <a href="https://github.com/ashee/cv" target="_blank">(Repo)</a> by Adrien Friggeri published in 2012. Numerous forks have been added since and have made the template significantly more feature rich such as the <a href="https://www.latextemplates.com/template/friggeri-resume-cv" target="_blank">"latex-cv-boosted"</a> by Jesper Dramsch. 
 
-Theis fork adds two-page functionality with side columns and Letter paper formatting, while toning-down the color richness. Additional sections such as "Profile" on top and "Projects" were added. All features of the previous fork, <a href="https://www.latextemplates.com/template/friggeri-resume-cv" target="_blank">"latex-cv-boosted"</a> by Jesper Dramsch, are preserved.
+This fork caters to the needs of the résumé sections and length of graduate school alumni (but anyone else will hopefully enjoy it as well). This fork adds two-page functionality with side columns and Letter paper formatting, while optionally toning-down the color richness. Additional sections such as "Profile" and "Projects" were added. All features of the previous fork, <a href="https://www.latextemplates.com/template/friggeri-resume-cv" target="_blank">"latex-cv-boosted"</a> by Jesper Dramsch, are preserved.
 
 ## Features and History:
 
-This Fork:
-* Two-Page Résumé
+**This Fork**:
+* Two-Page Optimized Résumé
 * Side Column on First and Second Page
-* Profile and Projects Section
+* New Profile, Certifications, and Projects Sections
 * Letter Paper Format
-* Mild Coloration (single color, customizable)
+* Mild Coloration Option(single color, customizable)
 
-Previous Fork <a href="https://www.latextemplates.com/template/friggeri-resume-cv" target="_blank">"latex-cv-boosted"</a>:
+Previous Fork <a href="https://www.latextemplates.com/template/friggeri-resume-cv" target="_blank">"latex-cv-boosted" by Jesper Dramsch</a>:
 * Cover Letter (matching design)
 * Icon Support
-* B/W and Reduced-Ink Support
-* Command-Line Build (Makefile)
-* Class File (.cls)
+* B/W and Reduced-Ink Option
+* Command-Line Build (mkefile)
+* Style moved to Class File (.cls)
 * Scoring Dots
 * Bibliography Section
 * A4 Paper Format
 * Five Fonts (heros, alegreya, merriweather, nunito, roboto)
 
 Original <a href="https://github.com/ashee/cv" target="_blank">Friggeri CV</a>:
+* Great Style
 * Single-Page Résumé
 * Strong Coloration
 * One Font
 
-## How it looks:
+## Take a Look:
 
-![Résumé PDF](https://raw.githubusercontent.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template/readme-material/cv.pdf)
-![CoverLetter PDF](https://raw.githubusercontent.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template/readme-material/coverletter.pdf) ChristianHallerX/PhD_Resume_and_CoverLetter_Template/blob/readme-material/coverletter.pdf
+![Résumé PDF p1](https://raw.githubusercontent.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template/master/png/cv_Page_1.png)
+![Résumé PDF p2](https://raw.githubusercontent.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template/master/png/cv_Page_2.png)
+Selected Options: roboto, custcol
+
+![Résumé PDF p2](https://raw.githubusercontent.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template/master/png/coverletter.png)
+Selected Options: roboto, noadress, custcol
 
 ## Résumé Sections
 
@@ -75,12 +80,13 @@ The default are friggeri colors if no parameter passed.
 
 # Customize the Templates
 Activating and de-activating lines happens with commenting (`%`).
+Icons are provided by the fontawesome package. <a href="https://ctan.math.illinois.edu/fonts/fontawesome/doc/fontawesome.pdf" target="_blank">Look up icon commands</a>.
 1. Enter all your details in résumé (`CV.tex`) and cover letter (`coverletter.tex`).
-2. Replace the `signature.png` with your scanned signature or comment it out 
-2. Fill in your details in the `Sections` subfolder.
-3. In the `CV.tex`, bring the sections in order you prefer. Note: don't let a section exceed the first page, since breaking the longlist objects results in an error.
-4. If you want to use the custom single-color scheme, set your custom color as <a href="https://htmlcolorcodes.com/" target="_blank">HTML code</a> in `friggeri-cv.cls` and `friggeri-coverletter.cls`.
-4. Enter font and color options in the line `\documentclass[roboto,custcol]{friggeri-cv}` in the tex files. These options can be passed directly while building (see below).
+2. Replace the `signature.png` with your scanned signature or comment it out.
+3. Fill in your details in the `Sections` subfolder.
+4. In the `CV.tex`, bring the sections in order you prefer. Note: don't let a section exceed the first page, since breaking the longlist objects results in an error.
+5. If you want to use the custom single-color scheme, set your custom color as <a href="https://htmlcolorcodes.com/" target="_blank">HTML code</a> in `friggeri-cv.cls` and `friggeri-coverletter.cls`.
+6. Enter font and color options in the line `\documentclass[roboto,custcol]{friggeri-cv}` in the tex files. These options can be passed directly while building (see below).
 
 # Build the Documents
 
@@ -98,5 +104,5 @@ The class options (Fonts, Colors)can be put into the `DOCOPTIONS`.
 1. Select build with XeLaTeX. Select "XeLaTeX + View PDF" for quick build.
 3. Select Quick Build and install all packages that may be missing on your system.
 2. If you want to use a publication list with a .bib file and Biber then you need to build a database from the .bib file before any contents will appear in the PDF.
-  1. Select Biber as bibliography builder. Then create a custom build command:  Next, b XeTeX -> Biber -> XeTeX -> XeTeX. <a href="https://tex.stackexchange.com/questions/154751/biblatex-with-biber-configuring-my-editor-to-avoid-undefined-citations/" target="_blank">More info here.</a>.
+  1. Select Biber as bibliography builder. Then create a custom build command:  Next, b XeTeX -> Biber -> XeTeX -> XeTeX. <a href="https://tex.stackexchange.com/questions/154751/biblatex-with-biber-configuring-my-editor-to-avoid-undefined-citations/" target="_blank">More info here</a>.
   2. Once the files were created you can resume with quick builds, unless you want to modify the database.
