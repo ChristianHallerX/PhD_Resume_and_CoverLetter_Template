@@ -17,4 +17,4 @@ jobs:
         - docker pull christianhallerx/tect-docker
 
       script:
-         - docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind christianhallerx/tect-docker /bin/sh -c "tectonic --keep-intermediates --reruns 0 cv.tex; biber cv; tectonic cv.tex; tectonic coverletter.tex"
+         - docker run --mount src=$TRAVIS_BUILD_DIR/src,target=/usr/src/tex,type=bind christianhallerx/tect-docker /bin/sh -c "tectonic cv.tex; tectonic coverletter.tex"
