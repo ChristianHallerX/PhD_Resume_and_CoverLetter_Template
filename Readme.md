@@ -1,8 +1,5 @@
 # PhD Resume and CoverLetter Template
 
-[![Build Status](https://travis-ci.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template.svg?branch=master)](https://travis-ci.com/ChristianHallerX/PhD_Resume_and_CoverLetter_Template)
-
-
 # Introduction
 
 LaTeX résumé and cover letter tetemplate based on the classic <a href="https://www.latextemplates.com/template/friggeri-resume-cv" target="_blank"> "Friggeri CV"</a> <a href="https://github.com/ashee/cv" target="_blank">(Repo)</a> by Adrien Friggeri published in 2012. Numerous forks have been added since and have made the template significantly more feature rich such as the <a href="https://www.latextemplates.com/template/friggeri-resume-cv" target="_blank">"latex-cv-boosted"</a> by Jesper Dramsch. 
