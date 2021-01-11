@@ -50,9 +50,7 @@ script: # Change working directory each time so including files will work. Chang
 
  # Final run of tectonic to create output
  - tectonic ./cv.tex --print
- - cd ../
  
-  - cd ./src/
  # Run tectonic once to generate intermediate files
  - tectonic --keep-intermediates --reruns 0 ./coverletter.tex
  # If a bcf file exists run biber to compile references

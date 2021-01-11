@@ -119,7 +119,7 @@
 % 
 % \setmathfont{XITS Math}
 %%% modified by Karol Kozioł for ShareLaTex use
-%\RequirePackage[quiet]{fontspec}
+\RequirePackage[quiet]{fontspec}
 %\RequirePackage[math-style=TeX]{unicode-math}
 
 \newfontfamily\bodyfont
